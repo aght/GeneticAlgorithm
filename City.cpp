@@ -4,18 +4,9 @@
 
 #include "City.hpp"
 
-City::City(std::string name, double x, double y) : name(name), x(x), y(y) {
-    if (x > MAX_RANGE) {
-        x = MAX_RANGE;
-    } else if (x < MIN_RANGE) {
-        x = MIN_RANGE;
-    }
-
-    if (y > MAX_RANGE) {
-        y = MAX_RANGE;
-    } else if (y < MIN_RANGE) {
-        y = MIN_RANGE;
-    }
+City::City(std::string name, double x, double y) : name(name), x(), y() {
+    x = x > MAX_RANGE ? MAX_RANGE : x < MIN_RANGE ? MIN_RANGE : x;
+    y = y > MAX_RANGE ? MAX_RANGE : y < MIN_RANGE ? MIN_RANGE : y;
 }
 
 std::string City::getName() const {
