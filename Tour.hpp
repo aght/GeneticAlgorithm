@@ -8,11 +8,19 @@
 #include <vector>
 
 #include "City.hpp"
+#include "CityManager.hpp"
 
 class Tour {
 private:
     std::vector<City> cites;
     double fitness;
+    double distance;
+public:
+    Tour();
+
+    Tour(const std::vector<City>& cities);
+
+    void generateRandomTour();
 };
 
 

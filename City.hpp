@@ -7,6 +7,7 @@
 
 #include <string>
 #include <cmath>
+#include <ostream>
 
 class City {
 private:
@@ -21,11 +22,21 @@ public:
     City(std::string name, double x, double y);
 
     std::string getName() const;
+
     double getX() const;
+
     double getY() const;
 
-    double distanceTo(const City& city) const;
+    double distanceTo(const City &city) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const City &city);
 };
+
+inline std::ostream &operator<<(std::ostream &os, const City &city) {
+    os << city.name << " [" << city.x << ", " << city.y << "]";
+
+    return os;
+}
 
 
 #endif //GENETICALGORITHM_CITY_HPP
