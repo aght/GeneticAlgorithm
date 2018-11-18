@@ -1,6 +1,11 @@
 #include <iostream>
+#include "City.hpp"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    City a{"Vancouver", 0, 0};
+    City b{"Toronto", 10, 0};
+
+    std::cout << a.distanceTo(b);
+
     return 0;
 }

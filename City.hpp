@@ -6,6 +6,7 @@
 #define GENETICALGORITHM_CITY_HPP
 
 #include <string>
+#include <cmath>
 
 class City {
 private:
@@ -22,6 +23,8 @@ public:
     std::string getName() const;
     double getX() const;
     double getY() const;
+
+    double distanceTo(const City& city) const;
 };
 
 
