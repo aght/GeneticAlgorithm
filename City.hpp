@@ -8,17 +8,24 @@
 #include <string>
 #include <cmath>
 #include <ostream>
+#include <random>
 
 class City {
 private:
     static constexpr double MAX_RANGE = 1000.00;
     static constexpr double MIN_RANGE = 0.00;
 
+    static long UID;
+
+    static std::mt19937 randomEngine;
+
     std::string name;
     double x;
     double y;
 
 public:
+    City() = default;
+
     City(std::string name, double x, double y);
 
     std::string getName() const;
@@ -30,10 +37,13 @@ public:
     double distanceTo(const City &city) const;
 
     friend std::ostream &operator<<(std::ostream &os, const City &city);
+
+public:
+    static City generateRandomCity();
 };
 
 inline std::ostream &operator<<(std::ostream &os, const City &city) {
-    os << city.name << " [" << city.x << ", " << city.y << "]";
+    os << "Name: " << city.name << " Locaiton: [" << city.x << ", " << city.y << "]";
 
     return os;
 }

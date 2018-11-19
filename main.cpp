@@ -1,14 +1,20 @@
 #include <iostream>
+
 #include "City.hpp"
+#include "Tour.hpp"
 
 int main() {
-    City a{"Vancouver", 0, 0};
-    City b{"Toronto", 10, 0};
+    std::vector<City> cities;
 
-    std::cout << a.distanceTo(b) << std::endl;
+    for (int i = 0; i < 10; i++) {
+        cities.push_back(City::generateRandomCity());
+    }
 
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
+    Tour tour = Tour::generateRandomTour(cities);
+
+    std::cout << tour << std::endl;
+
+    std::cout << tour.getDistance();
 
     return 0;
 }
