@@ -1,0 +1,14 @@
+//
+// Created by Andy on 11/18/2018.
+//
+
+#ifndef GENETICALGORITHM_GENETICALGORITHM_HPP
+#define GENETICALGORITHM_GENETICALGORITHM_HPP
+
+
+class GeneticAlgorithm {
+
+};
+
+
+#endif //GENETICALGORITHM_GENETICALGORITHM_HPP
