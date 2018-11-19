@@ -10,9 +10,12 @@
 #include <algorithm>
 
 #include "City.hpp"
+#include "Random.hpp"
 
 class Tour {
 private:
+    static constexpr int SHUFFLE_ITERATIONS = 64;
+
     std::vector<City> cities;
     double fitness;
     double distance;

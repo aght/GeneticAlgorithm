@@ -7,7 +7,7 @@
 Tour::Tour() : cities(), fitness(0), distance(0), size(0) {}
 
 Tour::Tour(const std::vector<City> &cities) : cities(cities), fitness(0), distance(0), size(cities.size()) {
-    std::random_shuffle(this->cities.begin(), this->cities.end());
+    Random::shuffleVector(this->cities, SHUFFLE_ITERATIONS);
 }
 
 Tour::Tour(const Tour &t) {
