@@ -27,7 +27,7 @@ int main() {
     cities.push_back(City{60, 20});
     cities.push_back(City{160, 20});
 
-    GeneticAlgorithm::run(100, 50, cities);
+    GeneticAlgorithm::run(100, 100, cities);
 
     return 0;
 }

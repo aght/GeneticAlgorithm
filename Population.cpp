@@ -18,7 +18,7 @@ Population::Population(const Population& population) {
     this->tours = population.tours;
 }
 
-Tour Population::getTour(int index) {
+Tour Population::getTour(int index) const {
     return tours[index];
 }
 
@@ -43,6 +43,6 @@ Tour Population::getFittest() {
     return fittest;
 }
 
-int Population::populationSize() {
+int Population::populationSize() const {
     return size;
 }

@@ -19,7 +19,7 @@ public:
 
     Population(const Population& population);
 
-    Tour getTour(int index);
+    Tour getTour(int index) const;
 
     void addTour(const Tour& tour);
 
@@ -27,7 +27,7 @@ public:
 
     Tour getFittest();
 
-    int populationSize();
+    int populationSize() const;
 };
 
 

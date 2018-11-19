@@ -47,7 +47,7 @@ double Tour::getDistance() {
     return distance;
 }
 
-City Tour::getCity(int index) {
+City Tour::getCity(int index) const {
     return cities[index];
 }
 
@@ -60,7 +60,7 @@ void Tour::addCity(const City &city) {
     ++size;
 }
 
-int Tour::tourSize() {
+int Tour::tourSize() const {
     return size;
 }
 

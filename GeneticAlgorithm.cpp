@@ -39,7 +39,7 @@ Population GeneticAlgorithm::evolve(Population& population) {
     return newPopulation;
 }
 
-Tour GeneticAlgorithm::crossover(Tour p1, Tour p2) {
+Tour GeneticAlgorithm::crossover(const Tour& p1, const Tour& p2) {
     Tour child;
 
     int start = Random::randomInt(0, p1.tourSize());
@@ -78,7 +78,7 @@ Tour GeneticAlgorithm::mutate(Tour tour) {
     return tour;
 }
 
-Tour GeneticAlgorithm::tournament(Population population) {
+Tour GeneticAlgorithm::tournament(const Population& population) {
     Population match;
 
     for (int i = 0; i < POOL_SIZE; ++i) {

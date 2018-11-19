@@ -2,8 +2,8 @@
 // Created by Andy on 11/18/2018.
 //
 
-#ifndef GENETICALGORITHM_GENETICALGORITHN_HPP
-#define GENETICALGORITHM_GENETICALGORITHN_HPP
+#ifndef GENETICALGORITHM_GENETICALGORITHM_HPP
+#define GENETICALGORITHM_GENETICALGORITHM_HPP
 
 #include "Population.hpp"
 
@@ -19,12 +19,12 @@ public:
 private:
     static Population evolve(Population& population);
 
-    static Tour crossover(Tour p1, Tour p2);
+    static Tour crossover(const Tour& p1, const Tour& p2);
 
     static Tour mutate(Tour tour);
 
-    static Tour tournament(Population population);
+    static Tour tournament(const Population& population);
 };
 
 
-#endif //GENETICALGORITHM_GENETICALGORITHN_HPP
+#endif //GENETICALGORITHM_GENETICALGORITHM_HPP

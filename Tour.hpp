@@ -32,13 +32,13 @@ public:
 
     double getDistance();
 
-    City getCity(int index);
+    City getCity(int index) const;
 
     void setCity(int index, const City &city);
 
     void addCity(const City &city);
 
-    int tourSize();
+    int tourSize() const;
 
     bool contains(const City &city);
 
@@ -54,5 +54,6 @@ inline std::ostream& operator<<(std::ostream& os, const Tour& tour) {
 
     return os;
 }
+
 
 #endif //GENETICALGORITHM_TOUR_HPP

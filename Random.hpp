@@ -12,24 +12,44 @@
 
 class Random {
 private:
+
+    /**
+     * Random number generator
+     */
     static std::mt19937 randomEngine;
 
 public:
+
+    /**
+     * Generates a random integer between two ranges (inclusive)
+     *
+     * @param start lower bound
+     * @param end upper bound
+     * @return random integer between lower and upper bound (inclusive)
+     */
     static int randomInt(int start, int end);
 
+    /**
+     * Generates a random double between two ranges (inclusive)
+     *
+     * @param start lower bound
+     * @param end upper bound
+     * @return random double between lower and upper bound (inclusive)
+     */
     static double randomDouble(int start, int end);
 
+    /**
+    * #### MUST BE DEFINED HERE ####
+    *
+    * Shuffles the elements in the vector
+    * @tparam T type of the vector
+    * @param vec vector to shuffle
+    */
     template<typename T>
     static void shuffleVector(std::vector<T> &vec, int iterations = 1);
 };
 
-/**
- * #### MUST BE DEFINED HERE ####
- *
- * Shuffles the elements in the vector
- * @tparam T type of the vector
- * @param vec vector to shuffle
- */
+// Must be defined inside header in order to allow for any type of vector
 template<typename T>
 void Random::shuffleVector(std::vector<T> &vec, int iterations) {
     for (int i = 0; i < iterations; ++i) {
