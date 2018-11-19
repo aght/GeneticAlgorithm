@@ -1,20 +1,13 @@
 //
-// Created by Andy Tang on 11/9/2018.
+// Created by Andy on 11/18/2018.
 //
 
-#include <chrono>
 #include "Tour.hpp"
 
-std::mt19937 Tour::randomEngine(std::chrono::system_clock::now().time_since_epoch().count());
-
-Tour::Tour(const std::vector<City> &cities) : cities(cities), fitness(0), distance(0) {}
-
-Tour Tour::generateRandomTour(const std::vector<City> &cities) {
-    Tour tour{cities};
-
-    std::shuffle(std::begin(tour.cities), std::end(tour.cities), randomEngine);
-
-    return tour;
+Tour::Tour(const std::vector<City>& cities) {
+    this->cities = cities;
+    fitness = 0;
+    distance = 0;
 }
 
 double Tour::getFitness() {
@@ -22,25 +15,28 @@ double Tour::getFitness() {
         fitness = 1 / getDistance();
     }
 
-    return fitness;
+    return distance;
 }
 
 double Tour::getDistance() {
     if (distance == 0) {
+        for (int i = 0; i < cities.size(); ++i) {
+            City from = cities[i];
+            City dest;
 
-        for (unsigned i = 0; i < cities.size(); ++i) {
-            City fromCity = cities[i];
-            City destCity{};
-
-            if (i + 1 >= cities.size()) {
-                destCity = cities[0];
+            if (i + 1 == cities.size()) {
+                dest = cities[0];
             } else {
-                destCity = cities[i + 1];
+                dest = cities[i];
             }
 
-            distance += fromCity.distanceTo(destCity);
+            distance += from.distanceTo(dest);
         }
     }
 
     return distance;
+}
+
+std::vector<City>& Tour::getCities() {
+    return cities;
 }

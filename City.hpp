@@ -10,6 +10,8 @@
 #include <ostream>
 #include <random>
 
+#include "Random.hpp"
+
 class City {
 private:
     static constexpr double MAX_RANGE = 1000.00;
@@ -17,14 +19,12 @@ private:
 
     static long UID;
 
-    static std::mt19937 randomEngine;
-
     std::string name;
     double x;
     double y;
 
 public:
-    City() = default;
+    City();
 
     City(std::string name, double x, double y);
 
@@ -37,9 +37,6 @@ public:
     double distanceTo(const City &city) const;
 
     friend std::ostream &operator<<(std::ostream &os, const City &city);
-
-public:
-    static City generateRandomCity();
 };
 
 inline std::ostream &operator<<(std::ostream &os, const City &city) {

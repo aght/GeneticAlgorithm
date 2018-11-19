@@ -4,16 +4,17 @@
 
 #include "Population.hpp"
 
-Population::Population(const std::vector<City>& cities) {
-    for (int i = 0; i < POPULATION_SIZE; i++) {
-        tours.push_back(Tour::generateRandomTour(cities));
+Population::Population(int populationSize, std::vector<City> cities) {
+    for (int i = 0; i < populationSize; i++) {
+        tours.push_back(Tour(cities));
     }
 }
 
 Tour Population::getFittest() {
     Tour fittest = tours[0];
-    for (int i = 0; i < tours.size(); i++) {
-        if (tours[i].getFitness() < fittest.getFitness()) {
+
+    for (int i = 1; i < tours.size(); i++) {
+        if (fittest.getDistance() > tours[i].getDistance()) {
             fittest = tours[i];
         }
     }
