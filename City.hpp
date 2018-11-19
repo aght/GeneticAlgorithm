@@ -26,7 +26,11 @@ private:
 public:
     City();
 
+    City(double x, double y);
+
     City(std::string name, double x, double y);
+
+    City(const City &city);
 
     std::string getName() const;
 
@@ -36,8 +40,11 @@ public:
 
     double distanceTo(const City &city) const;
 
+    City &operator=(City city);
+
     friend std::ostream &operator<<(std::ostream &os, const City &city);
-    friend bool operator==(const City& a, const City& b);
+
+    friend bool operator==(const City &a, const City &b);
 };
 
 inline std::ostream &operator<<(std::ostream &os, const City &city) {
@@ -46,7 +53,7 @@ inline std::ostream &operator<<(std::ostream &os, const City &city) {
     return os;
 }
 
-inline bool operator==(const City& a, const City& b) {
+inline bool operator==(const City &a, const City &b) {
     return a.name == b.name;
 }
 

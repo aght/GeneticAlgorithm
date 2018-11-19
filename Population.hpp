@@ -10,20 +10,24 @@
 class Population {
 private:
     std::vector<Tour> tours;
-    int populationSize;
+    int size;
 
 public:
-    Population(int populationSize);
+    Population();
 
-    Population(int populationSize, std::vector<City> cities);
+    Population(int populationSize, const std::vector<City> cities);
+
+    Population(const Population& population);
+
+    Tour getTour(int index);
+
+    void addTour(const Tour& tour);
+
+    void setTour(int index, const Tour& tour);
 
     Tour getFittest();
 
-    int getPopulationSize() const;
-
-    Tour& getTour(int i);
-
-    void setTour(int i, const Tour& tour);
+    int populationSize();
 };
 
 

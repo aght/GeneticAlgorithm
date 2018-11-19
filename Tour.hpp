@@ -5,6 +5,7 @@
 #ifndef GENETICALGORITHM_TOUR_HPP
 #define GENETICALGORITHM_TOUR_HPP
 
+#include <iostream>
 #include <vector>
 #include <algorithm>
 
@@ -15,26 +16,40 @@ private:
     std::vector<City> cities;
     double fitness;
     double distance;
-public:
-    Tour(int size);
+    int size;
 
-    Tour(const std::vector<City>& cities);
+public:
+    Tour();
+
+    Tour(const std::vector<City> &cities);
+
+    Tour(const Tour &t);
 
     double getFitness();
+
     double getDistance();
 
-    City& getCity(int i);
+    City getCity(int index);
 
-    void addCity(const City& city);
+    void setCity(int index, const City &city);
 
-    void setCity(int i, const City& city);
+    void addCity(const City &city);
 
     int tourSize();
 
-    bool contains(const City& city);
+    bool contains(const City &city);
 
-    int tourCapacity();
+    Tour &operator=(Tour other);
+
+    friend std::ostream& operator<<(std::ostream& os, const Tour& tour);
 };
 
+inline std::ostream& operator<<(std::ostream& os, const Tour& tour) {
+    for (City city : tour.cities) {
+        os << city << std::endl;
+    }
+
+    return os;
+}
 
 #endif //GENETICALGORITHM_TOUR_HPP

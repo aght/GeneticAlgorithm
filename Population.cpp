@@ -4,20 +4,38 @@
 
 #include "Population.hpp"
 
-Population::Population(int populationSize) : tours(), populationSize(populationSize) {
+Population::Population() : size(0) {}
+
+Population::Population(int populationSize, const std::vector<City> cities) : size(populationSize) {
+    for (int i = 0; i < populationSize; ++i) {
+        Tour t{cities};
+        tours.push_back(t);
+    }
 }
 
-Population::Population(int populationSize, std::vector<City> cities) {
-    for (int i = 0; i < populationSize; i++) {
-        tours.push_back(Tour(cities));
-    }
+Population::Population(const Population& population) {
+    this->size = population.size;
+    this->tours = population.tours;
+}
+
+Tour Population::getTour(int index) {
+    return tours[index];
+}
+
+void Population::addTour(const Tour &tour) {
+    tours.push_back(tour);
+    ++size;
+}
+
+void Population::setTour(int index, const Tour &tour) {
+    tours[index] = tour;
 }
 
 Tour Population::getFittest() {
     Tour fittest = tours[0];
 
-    for (unsigned i = 1; i < tours.size(); i++) {
-        if (fittest.getDistance() > tours[i].getDistance()) {
+    for (int i = 0; i < tours.size(); ++i) {
+        if (fittest.getFitness() > tours[i].getFitness()) {
             fittest = tours[i];
         }
     }
@@ -25,15 +43,6 @@ Tour Population::getFittest() {
     return fittest;
 }
 
-int Population::getPopulationSize() const {
-    return populationSize;
+int Population::populationSize() {
+    return size;
 }
-
-Tour& Population::getTour(int i) {
-    return tours[i];
-}
-
-void Population::setTour(int i, const Tour &tour) {
-    tours[i] = tour;
-}
-

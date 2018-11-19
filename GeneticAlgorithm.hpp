@@ -17,13 +17,13 @@ public:
     static void run(int iterations, int populationSize, std::vector<City> cities);
 
 private:
-    static Population evolve(Population population);
+    static Population evolve(Population& population);
 
     static Tour crossover(Tour p1, Tour p2);
 
-    static void mutate(Tour& tour);
+    static Tour mutate(Tour tour);
 
-    static Tour selection(Population population);
+    static Tour tournament(Population population);
 };
 
 
