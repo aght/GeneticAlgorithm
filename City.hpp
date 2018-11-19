@@ -37,12 +37,17 @@ public:
     double distanceTo(const City &city) const;
 
     friend std::ostream &operator<<(std::ostream &os, const City &city);
+    friend bool operator==(const City& a, const City& b);
 };
 
 inline std::ostream &operator<<(std::ostream &os, const City &city) {
     os << "Name: " << city.name << " Locaiton: [" << city.x << ", " << city.y << "]";
 
     return os;
+}
+
+inline bool operator==(const City& a, const City& b) {
+    return a.name == b.name;
 }
 
 

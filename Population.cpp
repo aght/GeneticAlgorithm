@@ -4,8 +4,7 @@
 
 #include "Population.hpp"
 
-Population::Population(int populationSize) : populationSize(populationSize) {
-    tours.reserve(populationSize);
+Population::Population(int populationSize) : tours(), populationSize(populationSize) {
 }
 
 Population::Population(int populationSize, std::vector<City> cities) {
@@ -17,7 +16,7 @@ Population::Population(int populationSize, std::vector<City> cities) {
 Tour Population::getFittest() {
     Tour fittest = tours[0];
 
-    for (int i = 1; i < tours.size(); i++) {
+    for (unsigned i = 1; i < tours.size(); i++) {
         if (fittest.getDistance() > tours[i].getDistance()) {
             fittest = tours[i];
         }

@@ -6,6 +6,7 @@
 #define GENETICALGORITHM_TOUR_HPP
 
 #include <vector>
+#include <algorithm>
 
 #include "City.hpp"
 
@@ -15,7 +16,7 @@ private:
     double fitness;
     double distance;
 public:
-    Tour() = default;
+    Tour(int size);
 
     Tour(const std::vector<City>& cities);
 
@@ -29,6 +30,10 @@ public:
     void setCity(int i, const City& city);
 
     int tourSize();
+
+    bool contains(const City& city);
+
+    int tourCapacity();
 };
 
 

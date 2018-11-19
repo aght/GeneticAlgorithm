@@ -17,15 +17,57 @@ void GeneticAlgorithm::run(int iterations, int populationSize, std::vector<City>
 }
 
 Population GeneticAlgorithm::evolve(Population population) {
+    Population newPopulation(population.getPopulationSize());
 
+    int eliteOffset = 1;
+    // Elite is the first one
+    newPopulation.setTour(0, population.getFittest());
+
+    for (int i = eliteOffset; i < newPopulation.getPopulationSize(); ++i) {
+        Tour p1 = selection(population);
+        Tour p2 = selection(population);
+
+        Tour child = crossover(p1, p1);
+
+        newPopulation.setTour(i, child);
+    }
+
+    for (int i = eliteOffset; i < newPopulation.getPopulationSize(); ++i) {
+        mutate(newPopulation.getTour(i));
+    }
+
+    return newPopulation;
 }
 
 Tour GeneticAlgorithm::crossover(Tour p1, Tour p2) {
-    Tour child;
+    Tour child(p1.tourSize());
 
     int start = Random::randomInt(0, p1.tourSize());
     int end = Random::randomInt(0, p1.tourSize());
 
+    if (start < end) {
+        std::swap(start, end);
+    }
+
+    std::vector<int> usedIndices;
+
+    for (int i = start; i < end; ++i) {
+        child.setCity(i, p1.getCity(i));
+        usedIndices.push_back(i);
+    }
+
+    for (int i = 0; i < p2.tourSize(); ++i) {
+        if (!child.contains(p2.getCity(i))) {
+            for (int j = 0; j < child.tourCapacity(); ++j) {
+                if (std::find(usedIndices.begin(), usedIndices.end(), j) == usedIndices.end()) {
+                    child.setCity(j, p2.getCity(i));
+                    break;
+                }
+            }
+        }
+    }
+
+    return child;
 }
 
 void GeneticAlgorithm::mutate(Tour &tour) {

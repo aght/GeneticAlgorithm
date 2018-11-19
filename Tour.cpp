@@ -3,6 +3,9 @@
 //
 
 #include "Tour.hpp"
+Tour::Tour(int size) {
+    cities.reserve(size);
+}
 
 Tour::Tour(const std::vector<City>& cities) {
     this->cities = cities;
@@ -20,7 +23,7 @@ double Tour::getFitness() {
 
 double Tour::getDistance() {
     if (distance == 0) {
-        for (int i = 0; i < cities.size(); ++i) {
+        for (unsigned i = 0; i < cities.size(); ++i) {
             City from = cities[i];
             City dest;
 
@@ -51,4 +54,12 @@ int Tour::tourSize() {
 
 void Tour::setCity(int i, const City &city) {
     cities[i] = city;
+}
+
+bool Tour::contains(const City &city) {
+    return std::find(cities.begin(), cities.end(), city) != cities.end();
+}
+
+int Tour::tourCapacity() {
+    return cities.capacity();
 }
