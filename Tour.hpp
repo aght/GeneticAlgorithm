@@ -15,12 +15,20 @@ private:
     double fitness;
     double distance;
 public:
+    Tour() = default;
+
     Tour(const std::vector<City>& cities);
 
     double getFitness();
     double getDistance();
 
-    std::vector<City>& getCities();
+    City& getCity(int i);
+
+    void addCity(const City& city);
+
+    void setCity(int i, const City& city);
+
+    int tourSize();
 };
 
 

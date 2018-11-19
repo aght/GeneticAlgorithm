@@ -4,6 +4,10 @@
 
 #include "Population.hpp"
 
+Population::Population(int populationSize) : populationSize(populationSize) {
+    tours.reserve(populationSize);
+}
+
 Population::Population(int populationSize, std::vector<City> cities) {
     for (int i = 0; i < populationSize; i++) {
         tours.push_back(Tour(cities));
@@ -21,3 +25,16 @@ Tour Population::getFittest() {
 
     return fittest;
 }
+
+int Population::getPopulationSize() const {
+    return populationSize;
+}
+
+Tour& Population::getTour(int i) {
+    return tours[i];
+}
+
+void Population::setTour(int i, const Tour &tour) {
+    tours[i] = tour;
+}
+

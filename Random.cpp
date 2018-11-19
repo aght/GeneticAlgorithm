@@ -10,3 +10,8 @@ int Random::randomInt(int start, int end) {
     std::uniform_int_distribution<int> distribution(start, end);
     return distribution(randomEngine);
 }
+
+double Random::randomDouble(int start, int end) {
+    std::uniform_real_distribution<double> distribution(start, end);
+    return distribution(randomEngine);
+}

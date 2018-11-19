@@ -13,6 +13,8 @@ private:
     static std::mt19937 randomEngine;
 public:
     static int randomInt(int start, int end);
+
+    static double randomDouble(int start, int end);
 };
 
 

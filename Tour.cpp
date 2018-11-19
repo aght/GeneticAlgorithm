@@ -37,6 +37,18 @@ double Tour::getDistance() {
     return distance;
 }
 
-std::vector<City>& Tour::getCities() {
-    return cities;
+City& Tour::getCity(int i) {
+    return cities[i];
+}
+
+void Tour::addCity(const City &city) {
+    cities.push_back(city);
+}
+
+int Tour::tourSize() {
+    return cities.size();
+}
+
+void Tour::setCity(int i, const City &city) {
+    cities[i] = city;
 }
