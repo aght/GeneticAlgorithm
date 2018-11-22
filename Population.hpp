@@ -28,7 +28,13 @@ public:
     Tour getFittest();
 
     int populationSize() const;
+
+    friend bool operator==(const Population &p1, const Population &p2);
 };
+
+inline bool operator==(const Population &p1, const Population &p2) {
+    return &p1 == &p2;
+}
 
 
 #endif //GENETICALGORITHM_POPULATION_HPP

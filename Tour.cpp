@@ -22,19 +22,17 @@ double Tour::getFitness() {
         fitness = 1 / getDistance();
     }
 
-    return distance;
+    return fitness;
 }
 
 double Tour::getDistance() {
     if (distance == 0) {
 
-        int temp = 0;
-
-        for (int i = 0; i < cities.size(); ++i) {
+        for (int i = 0; i < static_cast<int>(cities.size()); ++i) {
             City from = cities[i];
             City dest{};
 
-            if (i + 1 == cities.size()) {
+            if (i + 1 == static_cast<int>(cities.size())) {
                 dest = cities[0];
             } else {
                 dest = cities[i + 1];

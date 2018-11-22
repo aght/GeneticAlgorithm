@@ -34,8 +34,8 @@ void Population::setTour(int index, const Tour &tour) {
 Tour Population::getFittest() {
     Tour fittest = tours[0];
 
-    for (int i = 0; i < tours.size(); ++i) {
-        if (fittest.getFitness() > tours[i].getFitness()) {
+    for (int i = 0; i < static_cast<int>(tours.size()); ++i) {
+        if (fittest.getFitness() < tours[i].getFitness()) {
             fittest = tours[i];
         }
     }

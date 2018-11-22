@@ -45,6 +45,8 @@ public:
     Tour &operator=(Tour other);
 
     friend std::ostream& operator<<(std::ostream& os, const Tour& tour);
+
+    friend bool operator==(const Tour &t1, const Tour &t2);
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Tour& tour) {
@@ -53,6 +55,10 @@ inline std::ostream& operator<<(std::ostream& os, const Tour& tour) {
     }
 
     return os;
+}
+
+inline bool operator==(const Tour &t1, const Tour &t2){
+    return &t1 == &t2;
 }
 
 

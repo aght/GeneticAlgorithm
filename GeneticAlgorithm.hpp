@@ -5,6 +5,8 @@
 #ifndef GENETICALGORITHM_GENETICALGORITHM_HPP
 #define GENETICALGORITHM_GENETICALGORITHM_HPP
 
+#include <iostream>
+
 #include "Population.hpp"
 
 class GeneticAlgorithm {
@@ -14,16 +16,18 @@ private:
     static constexpr int NUM_ELITES = 1;
 
 public:
-    static void run(int iterations, int populationSize, std::vector<City> cities);
+    static void run(double factor, int iterations, int populationSize, int numElites, std::vector<City> cities);
 
 private:
-    static Population evolve(Population& population);
+    static Population evolve(Population& population, int numElites);
 
     static Tour crossover(const Tour& p1, const Tour& p2);
 
     static Tour mutate(Tour tour);
 
-    static Tour tournament(const Population& population);
+    static Tour selection(const Population &population);
+
+    static Population getNElites(int n, Population population);
 };
 
 

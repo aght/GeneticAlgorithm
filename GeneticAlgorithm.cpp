@@ -2,44 +2,75 @@
 // Created by Andy on 11/18/2018.
 //
 
-#include <iostream>
 #include "GeneticAlgorithm.hpp"
 
-void GeneticAlgorithm::run(int iterations, int populationSize, std::vector<City> cities) {
+void GeneticAlgorithm::run(double factor, int iterations, int populationSize, int numElites, std::vector<City> cities) {
     Population population(populationSize, cities);
 
-    std::cout << "Initial Distance: " << population.getFittest().getDistance() << std::endl;
+    double baseDistance = population.getFittest().getDistance();
 
-    for (int i = 0; i < iterations; ++i) {
-        population = evolve(population);
+    int i = 0;
+    double bestDistance = baseDistance;
+
+    while (i < iterations && ((bestDistance / baseDistance) > factor)) {
+        population = evolve(population, numElites);
+        double distance = population.getFittest().getDistance();
+
+        std::cout << "Iteration: " << (i + 1) << " Distance: " << distance << " Fitness: "
+                  << population.getFittest().getFitness()
+                  << std::endl;
+
+        if (distance < bestDistance) {
+            bestDistance = distance;
+        }
+        ++i;
     }
 
+    std::cout << "Initial Distance: " << baseDistance << std::endl;
     std::cout << "Final Distance: " << population.getFittest().getDistance() << std::endl;
 }
 
-Population GeneticAlgorithm::evolve(Population& population) {
+Population GeneticAlgorithm::evolve(Population &population, int numElites) {
     Population newPopulation;
 
-    int eliteOffset = 1;
-    newPopulation.addTour(population.getFittest());
+    Population tempPopulation;
 
-    for (int i = eliteOffset; i < population.populationSize(); ++i) {
-        Tour t1 = tournament(population);
-        Tour t2 = tournament(population);
+    Population nElitePopulation = getNElites(numElites, population);
+    for (int i = 0; i < nElitePopulation.populationSize(); ++i) {
+        newPopulation.addTour(nElitePopulation.getTour(i));
+    }
+
+    for (int i = 0; i < population.populationSize(); ++i) {
+        bool hasMatch = false;
+        for (int j = 0; j < nElitePopulation.populationSize(); ++j) {
+            if (population.getTour(i) == nElitePopulation.getTour(j)) {
+                hasMatch = true;
+                break;
+            }
+        }
+
+        if (!hasMatch) {
+            tempPopulation.addTour(population.getTour(i));
+        }
+    }
+
+    for (int i = numElites; i < tempPopulation.populationSize(); ++i) {
+        Tour t1 = selection(tempPopulation);
+        Tour t2 = selection(tempPopulation);
 
         Tour child = crossover(t1, t2);
 
         newPopulation.addTour(child);
     }
 
-    for (int i = eliteOffset; i < newPopulation.populationSize(); ++i) {
+    for (int i = numElites; i < newPopulation.populationSize(); ++i) {
         newPopulation.setTour(i, mutate(newPopulation.getTour(i)));
     }
 
     return newPopulation;
 }
 
-Tour GeneticAlgorithm::crossover(const Tour& p1, const Tour& p2) {
+Tour GeneticAlgorithm::crossover(const Tour &p1, const Tour &p2) {
     Tour child;
 
     int start = Random::randomInt(0, p1.tourSize());
@@ -78,8 +109,10 @@ Tour GeneticAlgorithm::mutate(Tour tour) {
     return tour;
 }
 
-Tour GeneticAlgorithm::tournament(const Population& population) {
+Tour GeneticAlgorithm::selection(const Population &population) {
     Population match;
+
+    std::vector<int> usedIndices;
 
     for (int i = 0; i < POOL_SIZE; ++i) {
         int randomIndex = Random::randomInt(0, population.populationSize() - 1);
@@ -89,4 +122,37 @@ Tour GeneticAlgorithm::tournament(const Population& population) {
     Tour fittest = match.getFittest();
 
     return fittest;
+}
+
+Population GeneticAlgorithm::getNElites(int n, Population population) {
+    Population elitePopulation;
+
+    Population tempPopulation = population;
+
+    int i = 0;
+    while (i < n) {
+        Tour fittest = tempPopulation.getFittest();
+        elitePopulation.addTour(fittest);
+
+        tempPopulation = Population{};
+        for (int j = 0; j < population.populationSize(); ++j) {
+
+            bool hasMatch = false;
+
+            for (int k = 0; k < elitePopulation.populationSize(); ++k) {
+                if (population.getTour(j) == elitePopulation.getTour((k))) {
+                    hasMatch = true;
+                    break;
+                }
+            }
+
+            if (!hasMatch) {
+                tempPopulation.addTour(population.getTour(j));
+            }
+        }
+
+        ++i;
+    }
+
+    return elitePopulation;
 }
