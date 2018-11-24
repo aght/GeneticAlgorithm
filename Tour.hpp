@@ -15,6 +15,7 @@
 class Tour {
 private:
     static constexpr int SHUFFLE_ITERATIONS = 64;
+    static constexpr int FITNESS_SCALAR = 1000;
 
     std::vector<City> cities;
     double fitness;

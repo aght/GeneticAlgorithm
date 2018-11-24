@@ -11,9 +11,8 @@
 
 class GeneticAlgorithm {
 private:
-    static constexpr double MUTATION_RATE = 0.015;
+    static constexpr double MUTATION_RATE = 0.05;
     static constexpr double POOL_SIZE = 5;
-    static constexpr int NUM_ELITES = 1;
 
 public:
     static void run(double factor, int iterations, int populationSize, int numElites, std::vector<City> cities);

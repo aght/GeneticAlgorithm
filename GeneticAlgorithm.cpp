@@ -12,22 +12,32 @@ void GeneticAlgorithm::run(double factor, int iterations, int populationSize, in
     int i = 0;
     double bestDistance = baseDistance;
 
-    while (i < iterations && ((bestDistance / baseDistance) > factor)) {
+    while (i < iterations && (1 - (bestDistance / baseDistance)) < factor) {
         population = evolve(population, numElites);
+
         double distance = population.getFittest().getDistance();
 
-        std::cout << "Iteration: " << (i + 1) << " Distance: " << distance << " Fitness: "
-                  << population.getFittest().getFitness()
+        std::cout << "Iteration: " << (i + 1)
+                  << " Distance: " << distance
+                  << " Fitness: " << population.getFittest().getFitness()
+                  << " Improvement Factor: " << ((1 - (bestDistance / baseDistance)) * 100) << "%"
                   << std::endl;
 
         if (distance < bestDistance) {
             bestDistance = distance;
         }
+
         ++i;
     }
 
+    std::cout << std::endl;
+
     std::cout << "Initial Distance: " << baseDistance << std::endl;
     std::cout << "Final Distance: " << population.getFittest().getDistance() << std::endl;
+
+    std::cout << "Target: " << (factor * 100) << "%"
+              << " Final: "  << ((1 - (bestDistance / baseDistance)) * 100) << "%"
+              << std::endl;
 }
 
 Population GeneticAlgorithm::evolve(Population &population, int numElites) {
@@ -111,8 +121,6 @@ Tour GeneticAlgorithm::mutate(Tour tour) {
 
 Tour GeneticAlgorithm::selection(const Population &population) {
     Population match;
-
-    std::vector<int> usedIndices;
 
     for (int i = 0; i < POOL_SIZE; ++i) {
         int randomIndex = Random::randomInt(0, population.populationSize() - 1);

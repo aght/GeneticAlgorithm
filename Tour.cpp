@@ -19,7 +19,7 @@ Tour::Tour(const Tour &t) {
 
 double Tour::getFitness() {
     if (fitness == 0) {
-        fitness = 1 / getDistance();
+        fitness = (1 / getDistance()) * FITNESS_SCALAR;
     }
 
     return fitness;

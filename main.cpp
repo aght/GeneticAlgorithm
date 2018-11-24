@@ -5,28 +5,28 @@
 int main() {
     std::vector<City> cities;
 
+    cities.push_back(City{140, 80});
+    cities.push_back(City{200, 160});
+    cities.push_back(City{60, 80});
+    cities.push_back(City{100, 40});
+    cities.push_back(City{20, 20});
+    cities.push_back(City{160, 20});
     cities.push_back(City{60, 200});
     cities.push_back(City{180, 200});
-    cities.push_back(City{80, 180});
-    cities.push_back(City{140, 180});
-    cities.push_back(City{20, 160});
-    cities.push_back(City{100, 160});
-    cities.push_back(City{200, 160});
-    cities.push_back(City{140, 140});
-    cities.push_back(City{40, 120});
-    cities.push_back(City{100, 120});
-    cities.push_back(City{180, 100});
-    cities.push_back(City{60, 80});
-    cities.push_back(City{120, 80});
-    cities.push_back(City{180, 60});
-    cities.push_back(City{20, 40});
-    cities.push_back(City{100, 40});
-    cities.push_back(City{200, 40});
-    cities.push_back(City{20, 20});
-    cities.push_back(City{60, 20});
-    cities.push_back(City{160, 20});
+    cities.push_back(City{230, 80});
+    cities.push_back(City{20, 70});
+    cities.push_back(City{90, 200});
+    cities.push_back(City{130, 90});
+    cities.push_back(City(200, 300));
+    cities.push_back(City(100, 70));
+    cities.push_back(City(0, 70));
+    cities.push_back(City(45, 70));
 
-    GeneticAlgorithm::run(0.4, 70, 1000, 5, cities);
+    const double improvementFactor = 0.35;
+    const int iterations = 150;
+    const int populationSize = 1500;
+    const int numberElites = 2;
+    GeneticAlgorithm::run(improvementFactor, iterations, populationSize, numberElites, cities);
 
     return 0;
 }
