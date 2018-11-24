@@ -2,6 +2,11 @@
 
 #include "GeneticAlgorithm.hpp"
 
+/**
+ * Start of the program
+ *
+ * @return exit code
+ */
 int main() {
     std::vector<City> cities;
 
