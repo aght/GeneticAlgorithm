@@ -10,6 +10,9 @@
 #include <chrono>
 #include <random>
 
+/**
+ * Class containing functions for randomization
+ */
 class Random {
 private:
 
@@ -39,9 +42,8 @@ public:
     static double randomDouble(int start, int end);
 
     /**
-    * #### MUST BE DEFINED HERE ####
-    *
     * Shuffles the elements in the vector
+    *
     * @tparam T type of the vector
     * @param vec vector to shuffle
     */
