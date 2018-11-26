@@ -65,11 +65,7 @@ Population GeneticAlgorithm::evolve(Population &population, int numElites) {
     }
 
     for (int i = numElites; i < tempPopulation.populationSize(); ++i) {
-        Tour t1 = selection(tempPopulation);
-        Tour t2 = selection(tempPopulation);
-
-        Tour child = crossover(t1, t2);
-
+        Tour child = crossover(selection(tempPopulation), selection(tempPopulation));
         newPopulation.addTour(child);
     }
 
@@ -137,8 +133,7 @@ Population GeneticAlgorithm::getNElites(int n, Population population) {
 
     Population tempPopulation = population;
 
-    int i = 0;
-    while (i < n) {
+    for (int i = 0; i < n; ++i) {
         Tour fittest = tempPopulation.getFittest();
         elitePopulation.addTour(fittest);
 
@@ -158,8 +153,6 @@ Population GeneticAlgorithm::getNElites(int n, Population population) {
                 tempPopulation.addTour(population.getTour(j));
             }
         }
-
-        ++i;
     }
 
     return elitePopulation;

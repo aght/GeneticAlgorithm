@@ -28,7 +28,7 @@ int main() {
     cities.push_back(City(45, 70));
 
     const double improvementFactor = 0.35;
-    const int iterations = 150;
+    const int iterations = 70;
     const int populationSize = 1500;
     const int numberElites = 2;
     GeneticAlgorithm::run(improvementFactor, iterations, populationSize, numberElites, cities);
